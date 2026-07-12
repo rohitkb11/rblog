@@ -5,22 +5,29 @@ function AllPosts() {
     const [posts,setPosts] = useState([]);
     useEffect(() => {
      
-    
-      return () => {
-        
+    service.getRows([]).then((posts)=>{
+      if(posts){
+        setPosts(posts.rows)
       }
+      console.log(posts.rows);
+      
+    })
+    console.log(posts);
+    
+     
     }, [])
-    service.getRows([]).then((posts)=>{if(posts)setPosts(posts.document)});
     
   return (
     <div className='w-full py-8'>
         <Container>
             <div className='flex flex-wrap'>
-                 {posts.map((post)=>{
-                    return(
-                        <div key={post.$id} className='p-2 w-1/4'><PostCard post={post}/></div>
-                )
-            })}
+                {
+                  posts.length > 0 ?
+                  posts.map((post)=>(
+                    <PostCard {...post}/>
+                  ))
+                  : <h1> NO POSTS TO SHOW</h1>
+                }
             </div>
            
         </Container> 

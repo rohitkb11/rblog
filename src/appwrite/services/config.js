@@ -79,7 +79,7 @@ try {
     )
 } catch (error) {
     console.log("list Rows error" , error);
-    return false;
+    return null;
 }
 }
 
@@ -107,7 +107,7 @@ try {
 }
 }
 getFilePreview(fileId){
-return this.storage.getFilePreview(
+return this.bucket.getFilePreview(
    config.appwriteBucketId,
    fileId,
 

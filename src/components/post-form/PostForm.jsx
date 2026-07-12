@@ -16,6 +16,7 @@ function PostForm({post}) {
     });
     const navigate = useNavigate();
     const userData = useSelector(state=>state.userData);
+
     const submit = async (data)=>{
         if(post){
            
@@ -34,9 +35,13 @@ function PostForm({post}) {
                 data.featuredImage = fileId
                 const dbPost = await service.createRow({
                     ...data,
-                    userid : userData.$id,
+                    userid : userData.userData.$id,
 
                 })
+                console.log(userData);
+                console.log(userData.userData.name);
+                
+                
                 if(dbPost){ 
                 navigate(`/post/${dbPost.$id}`)
             }
@@ -81,7 +86,7 @@ function PostForm({post}) {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
-                <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
+                {/* <RTE name="content" label="Content :"  control={control} defaultValue={getValues("content")} /> */}
             </div>
             <div className="w-1/3 px-2">
                 <Input
@@ -94,7 +99,7 @@ function PostForm({post}) {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            src={service.getFilePreview(post.featuredImage)}
                             alt={post.title}
                             className="rounded-lg"
                         />
@@ -109,6 +114,7 @@ function PostForm({post}) {
                 <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
                     {post ? "Update" : "Submit"}
                 </Button>
+              
             </div>
         </form>
   )

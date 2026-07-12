@@ -3,11 +3,12 @@
   import authservice from './appwrite/auth/auth';
   import { login,logout } from './store/authSlice';
   import { Header ,Footer} from './components/index';
-  import { Outlet } from 'react-router-dom';
+  import { Outlet, useNavigate } from 'react-router-dom';
   function App() {
 
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     useEffect(()=>{
     authservice.getCurrentUser().then(
       (userData)=>{
@@ -16,6 +17,8 @@
         }
         else{
           dispatch(logout())
+          navigate('/');
+          
         }
         
         

@@ -4,16 +4,18 @@ import './index.css'
 import { Provider } from 'react-redux'
 import App from './App.jsx'
 import store from './store/store.js'
-import { createBrowserRouter } from 'react-router-dom'
-import { AuthLayout, Login } from './components/index.js'
+import { createBrowserRouter , RouterProvider } from 'react-router-dom'
+import { AuthLayout, Input } from './components/index.js'
 import Home from './pages/Home.jsx'
 import AddPost from "./pages/AddPost";
-import Signup from './pages/Signup'
+
 import EditPost from "./pages/EditPost";
+import Login from './pages/Login.jsx'
 
 import Post from "./pages/Post";
 
 import AllPosts from "./pages/AllPosts";
+import SignupPage from './pages/SignupPage.jsx'
 
 const router = createBrowserRouter([
    {
@@ -28,7 +30,9 @@ const router = createBrowserRouter([
             path: "/login",
             element: (
                 <AuthLayout authentication={false}>
-                    <Login />
+                    <Login /> 
+                    <h1> hi hhkkjljk </h1>
+                    
                 </AuthLayout>
             ),
         },
@@ -36,7 +40,8 @@ const router = createBrowserRouter([
             path: "/signup",
             element: (
                 <AuthLayout authentication={false}>
-                    <Signup />
+                    <SignupPage />
+                   
                 </AuthLayout>
             ),
         },
@@ -76,10 +81,11 @@ const router = createBrowserRouter([
 ])
 
 createRoot(document.getElementById('root')).render(
+
+
   <StrictMode>
     <Provider store={store}>
-      <App />
-    </Provider>
-    
+     <RouterProvider router={router} />
+    </Provider>   
   </StrictMode>,
 )

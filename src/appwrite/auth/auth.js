@@ -9,7 +9,7 @@ constructor(){
     .setProject(config.appwriteProjectId);
     this.account = new Account(this.client);
 }
-async createAccount({email,password,userName}) {
+async createAccount({name,email,password}) {
     try {
         const userAccount = await this.account.create({
   userId: ID.unique(),
@@ -41,8 +41,9 @@ async getCurrentUser(){
          
     } catch (error) {
         console.log("gettig current user error" , error);
+        return null
     }
-    return null;
+    
    
 }
 async logout(){

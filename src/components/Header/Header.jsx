@@ -33,8 +33,9 @@ function Header() {
       url: "/add-post",
       active: authStatus,
   },
+  
  ]
- console.log(authStatus);
+
  
 
   return (
@@ -57,6 +58,9 @@ function Header() {
               </li>
             ) : null
             )}
+            {authStatus && 
+            <li><LogoutBtn/></li>
+            }
           </ul>
         </nav>
       </Container>
